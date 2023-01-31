@@ -1,0 +1,10 @@
+.vscode
+__pycache__
+*.db
+.coverage
+.idea
+cov.xml
+.pytest_cache
+node_modules
+remember
+.vs

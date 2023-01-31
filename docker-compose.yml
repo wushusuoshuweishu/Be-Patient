@@ -1,0 +1,27 @@
+version: "3"
+services:
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: >
+      bash -c
+      "python manage.py init_test_db &&
+      gunicorn -w4 -b 0.0.0.0:5000 --log-level=debug manage:app"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/:/app/
+
+  frontend:
+    container_name: frontend
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
